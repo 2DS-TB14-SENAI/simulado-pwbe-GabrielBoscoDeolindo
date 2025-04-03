@@ -9,10 +9,11 @@
     <h1>Livros disponíveis</h1>
 
         {% for livro in livros %}
-                <p><strong>Título:</strong> {{ livro.titulo }}</p>
-                <p><strong>Autor:</strong> {{ livro.autor }}</p>
-                <p><strong>Páginas:</strong> {{ livro.paginas }}</p>
-                <hr>
+        <ul>
+                <li><strong>Título:</strong> {{ livro.titulo }}</li>
+                <li><strong>Autor:</strong> {{ livro.autor }}</li>
+                <li><strong>Páginas:</strong> {{ livro.paginas }}</li>
+            </ul>
         {% endfor %}
         <a href="/criarlivro/">Criar novo livro</a>
 </body>
