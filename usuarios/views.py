@@ -2,7 +2,7 @@ from django.shortcuts import render
 from rest_framework.decorators import api_view, permission_classes
 from rest_framework.response import Response
 from rest_framework import status
-from .models import UserAbs
+from .models import Usuario
 from django.contrib.auth import authenticate
 from rest_framework_simplejwt.tokens import RefreshToken
 from rest_framework.permissions import IsAuthenticated
@@ -18,13 +18,13 @@ def create_user(request):
     if not username or not password or not email:
         return Response({'erro': 'Informações insuficientes'}, status=status.HTTP_400_BAD_REQUEST)
     
-    if UserAbs.objects.filter(username = username).exists():
+    if Usuario.objects.filter(username = username).exists():
         return Response({"erro": "user já existe"}, status=status.HTTP_400_BAD_REQUEST)
     
-    if UserAbs.objects.filter(email = email).exists():
+    if Usuario.objects.filter(email = email).exists():
         return Response({"erro": "email já existe"}, status=status.HTTP_400_BAD_REQUEST)
 
-    usuario = UserAbs.objects.create_user(
+    usuario = Usuario.objects.create_user(
         username=username,
         password=password,
         email=email,
