@@ -12,22 +12,17 @@ from rest_framework.permissions import IsAuthenticated
 def create_user(request):
     username = request.data.get('username')
     password = request.data.get('password')
-    email = request.data.get('email')
     telefone = request.data.get('telefone')
     
-    if not username or not password or not email or not telefone:
+    if not username or not password or not telefone:
         return Response({'erro': 'Informações insuficientes'}, status=status.HTTP_400_BAD_REQUEST)
     
     if Usuario.objects.filter(username = username).exists():
         return Response({"erro": "user já existe"}, status=status.HTTP_400_BAD_REQUEST)
-    
-    if Usuario.objects.filter(email = email).exists():
-        return Response({"erro": "email já existe"}, status=status.HTTP_400_BAD_REQUEST)
 
     usuario = Usuario.objects.create_user(
         username=username,
         password=password,
-        email=email,
         telefone=telefone,
     )
     return Response({"Mensagem": f"usuario {username} criado com sucesso"}, status=status.HTTP_201_CREATED)
