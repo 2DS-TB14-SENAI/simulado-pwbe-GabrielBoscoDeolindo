@@ -13,10 +13,9 @@ def create_user(request):
     username = request.data.get('username')
     password = request.data.get('password')
     email = request.data.get('email')
-    cargo = request.data.get('cargo')
     telefone = request.data.get('telefone')
     
-    if not username or not password or not email or not cargo:
+    if not username or not password or not email:
         return Response({'erro': 'Informações insuficientes'}, status=status.HTTP_400_BAD_REQUEST)
     
     if UserAbs.objects.filter(username = username).exists():
@@ -29,7 +28,6 @@ def create_user(request):
         username=username,
         password=password,
         email=email,
-        cargo=cargo,
         telefone=telefone,
     )
     return Response({"Mensagem": f"usuario {username} criado com sucesso"}, status=status.HTTP_201_CREATED)
