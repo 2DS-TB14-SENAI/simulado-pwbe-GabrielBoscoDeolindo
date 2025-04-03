@@ -15,7 +15,7 @@ def create_user(request):
     email = request.data.get('email')
     telefone = request.data.get('telefone')
     
-    if not username or not password or not email:
+    if not username or not password or not email or not telefone:
         return Response({'erro': 'Informações insuficientes'}, status=status.HTTP_400_BAD_REQUEST)
     
     if Usuario.objects.filter(username = username).exists():
@@ -36,6 +36,7 @@ def create_user(request):
 def login(request):
     username = request.data.get('username')
     password = request.data.get('password')
+    telefone = request.data.get('telefone')
 
     usuario = authenticate(username=username, password=password)
 
